@@ -1,0 +1,59 @@
+/* ===== RESET BÁSICO ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+  background: linear-gradient(135deg, #6c63ff, #3a3a3a);
+  color: #222;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+}
+
+/* ===== CARD PRINCIPAL ===== */
+div {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  max-width: 350px;
+  width: 90%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito hover (passar o mouse em cima) */
+div:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== PARÁGRAFOS ===== */
+p {
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+/* ===== PARÁGRAFO DE MENSAGEM ===== */
+#msg {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #6c63ff;
+  font-size: 1.2rem;
+}
