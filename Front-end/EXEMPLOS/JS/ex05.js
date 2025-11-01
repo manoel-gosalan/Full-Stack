@@ -61,10 +61,24 @@ function aoClicar() {
     const estaAtivo = this.classList.contains('clicked');
 
     if (!estaAtivo) {
-        this.textContent = 'クリックした' // Kurikku shita -> Clicou
-        this.classList.add('Clicked');
+        this.textContent = 'クリックした -> Clicou' // Kurikku shita -> Clicou
+        this.classList.add('clicked');
         this.setAttribute('aria-pressed', 'true');
         atualizarStatus('✅ <strong>Click:</strong> Área ATIVADA! Você clicou completamente!');
+
+        // ✅ VOLTA PARA "Interaja" DEPOIS DE 10 SEGUNDOS
+
+        setTimeout(()=> {
+            //Verifica se o usuario ainda está ativo ( Usuario pode ter clicado mais de uma vez )
+
+            if (this.classList.contains('clicked')) {
+                this.textContent = 'Interaja';
+                this.classList.remove('clicked');
+                this.setAttribute('aria-pressed', 'false');
+                atualizarStatus('⏱️ <strong>Auto-reset:</strong> Voltou ao estado inicial');
+            }
+        }, 10000); // 10000 equivale a 10 segundos
+
     } else {
         this.textContent = 'Interaja'
         this.classList.remove('clicked');
@@ -83,7 +97,7 @@ function aoDuploClick() {
     this.style.transform = 'rotate(360deg)';
     setTimeout(() => {
         this.style.transform = '';
-    }, 1000);
+    }, 5000);
 }
 
 // ========================================

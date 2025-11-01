@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Multa</title>
+    <link rel="stylesheet" href="../CSS/ex06.css">
+</head>
+
+<body>
+    <div id="container">
+        <h1>🚗 Sistema de Multa</h1>
+
+        <div class="input-group">
+
+            <label for="txtvel">Velocidade do Carro</label>
+
+            <div class="input-wrapper">
+                <input 
+                type="number" 
+                id="txtvel" 
+                placeholder="Digite a velocidade" 
+                min="0" 
+                autofocus>
+                <span class="unit">Km/h</span>
+            </div>
+        </div>
+
+        <button id="btn">Verificar</button>
+
+        <div id="resultado"></div>
+    </div>
+    <script src="../JS/ex06.js"></script>
+</body>
+
+</html>
