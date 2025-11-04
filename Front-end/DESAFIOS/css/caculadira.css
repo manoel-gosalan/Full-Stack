@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+JP:wght@400;600&display=swap');
+
+:root {
+    --cor-fundo: #f9fafb;
+    --cor-primaria: #0078d7;
+    --cor-sucesso: #3ba55c;
+    --cor-erro: #d9534f;
+    --cor-texto: #333;
+    --radius: 1rem;
+    --transicao: 0.3s ease;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform var(--transicao);
+}
+
+.container:hover {
+    transform: translateY(-2px);
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 2px solid #ccc;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+
+input:focus {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.2);
+}
+
+button {
+    width: 100%;
+    background: var(--cor-primaria);
+    color: white;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background var(--transicao), transform var(--transicao);
+}
+
+button:hover {
+    background: #005bb5;
+    transform: translateY(-1px);
+}
+
+.resultado {
+    margin-top: 1.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity var(--transicao), transform var(--transicao);
+}
+
+.resultado.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.resultado.sucesso strong {
+    color: var(--cor-sucesso);
+}
+
+.resultado.erro strong {
+    color: var(--cor-erro);
+}
+
+/* Cores semânticas no resultado */
+.resultado.reprovado strong {
+  color: #d9534f; /* vermelho */
+}
+
+.resultado.recuperacao strong {
+  color: #a16107; /* amarelo */
+}
+
+.resultado.aprovado strong {
+  color: #3ba55c; /* verde */
+}
+
+.resultado.aprovado90 strong {
+    color: #024d1a;
+}

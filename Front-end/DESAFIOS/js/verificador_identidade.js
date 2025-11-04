@@ -33,7 +33,7 @@ function exibirResultado(conteudo, tipo = 'normal') {
     divResultado.className = `resultado show ${tipo}`;
 }
 
-// Listeners
+// Funcao do button
 btnVerificar.addEventListener('click', verificarIdade);
 inputIdade.addEventListener('keypress', e => e.key === 'Enter' && verificarIdade());
 
