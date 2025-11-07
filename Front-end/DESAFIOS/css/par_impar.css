@@ -1,0 +1,129 @@
+/* ======== RESET BÁSICO ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+/* ======== LAYOUT ======== */
+body {
+    background: #f8f9fa;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ======== CONTAINER ======== */
+.container {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    transition: all 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ======== TÍTULO ======== */
+h1 {
+    font-size: 1.6rem;
+    color: #d62828;
+    margin-bottom: 1.5rem;
+}
+
+/* ======== INPUT GROUP ======== */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+label {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus {
+    border-color: #0077b6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+}
+
+/* ======== BOTÃO ======== */
+button {
+    background: #0077b6;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background: #023e8a;
+    transform: scale(1.03);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* ======== RESULTADO ======== */
+.resultado {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background: #f1f1f1;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.resultado.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cores dinâmicas para o tipo de resultado */
+.resultado.normal {
+    color: #333;
+    background: #f8f9fa;
+}
+
+.resultado.erro {
+    color: #d62828;
+    background: #ffe6e6;
+}
+
+.resultado.par {
+    background: #e0f7fa;
+    color: #00796b;
+}
+
+.resultado.impar {
+    background: #fff3e0;
+    color: #e65100;
+}
