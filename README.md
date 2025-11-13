@@ -21,7 +21,7 @@ Cada exercício representa um passo na minha jornada rumo à carreira de desenvo
 - CSS3 (Gradientes, Animações, Flexbox)
 - JavaScript (DOM, eventos, boas práticas)
 
-##📚 O que já aprendi
+## 📚 O que já aprendi
 
 - Seleção e manipulação de elementos no DOM
 
