@@ -47,7 +47,7 @@ const verificarMaior = () => {
 // =========================
 // Eventos
 // =========================
-btnVerificar.addEventListener('click', function () {
+btnVerificar.addEventListener('click', () => {
         console.log('Clicou');
         verificarMaior();
     });

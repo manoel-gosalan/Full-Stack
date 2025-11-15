@@ -1,0 +1,132 @@
+/* ===== Variáveis de Tema ===== */
+:root {
+    --bg: #ffffff;
+    --bg-card: #f5f7fa;
+    --text: #1a1a1a;
+    --border: #d5d9e0;
+    --input-bg: #ffffff;
+    --input-border: #c7ccd4;
+    --primary: #4069ff;
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+    --bg: #0d0f12;
+    --bg-card: #14171c;
+    --text: #e5e7eb;
+    --border: #1f242b;
+    --input-bg: #1d2127;
+    --input-border: #2a323c;
+    --primary: #4069ff;
+    --shadow: rgba(0,0,0,0.35);
+}
+
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+/* ===== Layout ===== */
+body {
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.container {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 0 0 40px var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+/* ===== Toggle ===== */
+.toggle {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--text);
+    transition: 0.3s;
+}
+
+.toggle:hover {
+    transform: rotate(20deg);
+}
+
+/* ===== Título ===== */
+.titulo {
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* ===== Inputs ===== */
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+label {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+
+input {
+    padding: 14px;
+    border: 1.5px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: 0.2s ease;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 6px rgba(64,105,255,0.4);
+    outline: none;
+}
+
+/* ===== Botão ===== */
+.botao {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.botao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(64,105,255,0.3);
+}
+
+/* ===== Resultado ===== */
+.resultado {
+    margin-top: 24px;
+    min-height: 40px;
+    padding: 16px;
+    border-left: 4px solid var(--primary);
+    border-radius: 10px;
+    background: var(--input-bg);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.15);
+}
