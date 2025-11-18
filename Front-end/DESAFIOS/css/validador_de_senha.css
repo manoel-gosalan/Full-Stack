@@ -1,0 +1,161 @@
+/* =========================
+   TEMA (Light/Dark)
+========================= */
+:root {
+    --bg: #f4f4f6;
+    --card: #ffffff;
+    --texto: #1a1a1a;
+    --campo: #f0f0f3;
+    --borda: #d0d0d5;
+    --primary: #3b82f6;
+    --fraco: #e74c3c;
+    --medio: #f1c40f;
+    --forte: #2ecc71;
+}
+
+body.dark {
+    --bg: #0d0d0f;
+    --card: #151518;
+    --texto: #e6e6e6;
+    --campo: #1e1e22;
+    --borda: #2b2b31;
+}
+
+/* =========================
+   GERAL
+========================= */
+
+body {
+    background: var(--bg);
+    font-family: "Inter", sans-serif;
+    color: var(--texto);
+    margin: 0;
+    padding: 20px;
+    transition: background .3s, color .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card estilo app japonês */
+.card {
+    background: var(--card);
+    padding: 25px;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.08);
+    border: 1px solid var(--borda);
+    animation: fade .3s ease;
+}
+
+/* Kanji clean */
+.titulo {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Campos */
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    opacity: .8;
+}
+
+input {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--borda);
+    background: var(--campo);
+    outline: none;
+    transition: border .2s, box-shadow .2s;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 6px rgba(59,130,246,.3);
+}
+
+/* Botão */
+button {
+    padding: 14px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    transition: transform .15s, opacity .3s;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+/* Indicador de força */
+#forca {
+    margin-top: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Resultado */
+#resultado {
+    margin-top: 18px;
+    font-size: 15px;
+    text-align: center;
+    min-height: 20px;
+}
+
+/* =========================
+   Toggle Minimalista
+========================= */
+
+.theme-toggle {
+    width: 55px;
+    height: 28px;
+    border-radius: 30px;
+    background: var(--campo);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    cursor: pointer;
+    border: 1px solid var(--borda);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.theme-toggle span {
+    font-size: 14px;
+    opacity: 0.5;
+    transition: .3s;
+}
+
+.theme-toggle.active .sun {
+    opacity: 1;
+}
+
+.theme-toggle.active .moon {
+    opacity: 0.3;
+}
+
+.theme-toggle:not(.active) .moon {
+    opacity: 1;
+}
+
+/* Fade suave */
+@keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

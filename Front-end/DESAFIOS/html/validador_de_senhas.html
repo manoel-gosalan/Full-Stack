@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de Senhas</title>
+    <link rel="stylesheet" href="../css/validador_de_senha.css">
+</head>
+<body>
+    
+    <div class="theme-toggle" id="theme-toggle">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+    </div>
+
+    <main class="card">
+        <h1 class="titulo">Validador de Senha</h1>
+
+        <div class="campo">
+            <label for="user">Usuário</label>
+            <input type="text" id="user" placeholder="Digite seu usuário">
+        </div>
+
+        <div class="campo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha">
+        </div>
+
+        <button id="button">Validar</button>
+
+        <div id="forca"></div>
+        <div id="resultado"></div>
+    </main>
+
+    <script src="../js/validador_de_senha.js"></script>
+</body>
+</html>
