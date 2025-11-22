@@ -1,0 +1,57 @@
+body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        input:invalid {
+            border-color: #ff4444;
+        }
+        input:valid {
+            border-color: #44ff44;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .erro {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .sucesso {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .negado {
+            background: #fff3e0;
+            color: #e65100;
+        }

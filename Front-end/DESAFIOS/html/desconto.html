@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desconto da loja</title>
+    <link rel="stylesheet" href="../css/desconto.css">
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌸</span>
+        <span id="theme-text">Modo Escuro</span>
+    </div>
+
+    <div class="container">
+        <h1>🏮 Verificação de Desconto 🏮</h1>
+        <form id="formulario">
+            <div class="form-group">
+                <label for="valor">Valor da compra (€):</label>
+                <input 
+                    type="number" 
+                    id="valor" 
+                    placeholder="ex: 150.00" 
+                    required 
+                    step="0.01"
+                    min="0"
+                    title="Digite o valor da compra">
+            </div>
+            <button type="submit">Verificar Desconto</button>
+        </form>
+        <div id="resultado"></div>
+    </div>
+    <script src="../js/desconto.js"></script>
+    
+</body>
+</html>
