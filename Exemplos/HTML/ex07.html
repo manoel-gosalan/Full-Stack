@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia da Semana Multilingue</title>
+    <link rel="stylesheet" href="../CSS/ex07.css">
+</head>
+<body>
+     <div class="container">
+        <h1>🗓️ Que dia é hoje?</h1>
+        <p class="subtitle">Descubra o dia da semana em vários idiomas</p>
+
+        <div class="dia-atual">
+            <h2>Hoje é</h2>
+            <div class="dia-nome" id="diaPrincipal">...</div>
+            <div class="data-completa" id="dataCompleta">...</div>
+        </div>
+
+        <div class="idiomas">
+            <div class="idioma-card">
+                <div class="idioma-info">
+                    <span class="idioma-flag">🇧🇷</span>
+                    <span class="idioma-nome">Português</span>
+                </div>
+                <span class="idioma-dia" id="diaPT">...</span>
+            </div>
+
+            <div class="idioma-card">
+                <div class="idioma-info">
+                    <span class="idioma-flag">🇺🇸</span>
+                    <span class="idioma-nome">English</span>
+                </div>
+                <span class="idioma-dia" id="diaEN">...</span>
+            </div>
+
+            <div class="idioma-card">
+                <div class="idioma-info">
+                    <span class="idioma-flag">🇯🇵</span>
+                    <span class="idioma-nome">日本語</span>
+                </div>
+                <span class="idioma-dia" id="diaJP">...</span>
+            </div>
+
+        </div>
+
+        <button class="refresh-btn" onclick="atualizarDias()">
+            🔄 Atualizar
+        </button>
+
+        <div class="footer">
+            Desenvolvido Por Gosalan com 💜 | Clean Code & Best Practices
+        </div>
+    </div>
+    <script src="../JS/ex07.js"></script>
+</body>
+</html>
