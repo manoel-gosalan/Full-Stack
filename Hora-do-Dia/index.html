@@ -3,23 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hora do Dia</title>
+    <title>時刻 - Hora do Dia</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Titulo</h1>
+        <h1>時刻</h1>
+        <div class="subtitle">HORA DO DIA</div>
     </header>
-        <section>
-            <div>
 
+    <main>
+        <div class="card loading">
+            <div id="horario" class="horario-digital">
+                00:00
             </div>
-            <div>
+            <div id="periodo" class="periodo">
+                Carregando...
+            </div>
+            <div class="foto-container">
+                <img id="foto" src="" alt="Imagem do período do dia">
+            </div>
+            <div class="detalhes">
+                <div class="detalhe-item">
+                    <div class="detalhe-label">Dia</div>
+                    <div id="dia" class="detalhe-valor">--</div>
+                </div>
+                <div class="detalhe-item">
+                    <div class="detalhe-label">Mês</div>
+                    <div id="mes" class="detalhe-valor">--</div>
+                </div>
+                <div class="detalhe-item">
+                    <div class="detalhe-label">Ano</div>
+                    <div id="ano" class="detalhe-valor">----</div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-            </div>
-        </section>
     <footer>
-
+        <p>&copy;Criado por <strong>Gosalan</strong> 💙</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
