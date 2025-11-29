@@ -27,52 +27,84 @@ const MESES = [
     'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
 ];
 
+const INTERVALO_ATUALIZACAO = 1000;
+
+const elementos = {
+    horario: null,
+    periodo: null,
+    foto: null,
+    dia: null,
+    mes: null,
+    ano: null
+};
+
 function obterPeriodoDoDia(hora) {
     if (hora >= PERIODOS.MANHA.inicio && hora < PERIODOS.MANHA.fim) {
         return PERIODOS.MANHA;
-    } else if (hora >= PERIODOS.TARDE.inicio && hora < PERIODOS.TARDE.fim) {
+    }
+    
+    if (hora >= PERIODOS.TARDE.inicio && hora < PERIODOS.TARDE.fim) {
         return PERIODOS.TARDE;
     }
+    
     return PERIODOS.NOITE;
+}
+
+function formatarNumero(numero) {
+    return numero.toString().padStart(2, '0');
+}
+
+function atualizarHorario(agora) {
+    const hora = formatarNumero(agora.getHours());
+    const minutos = formatarNumero(agora.getMinutes());
+    elementos.horario.textContent = `${hora}:${minutos}`;
+}
+
+function atualizarPeriodo(periodo) {
+    elementos.periodo.textContent = `${periodo.nomeJapones} ${periodo.nome}`;
+}
+
+function atualizarImagem(periodo) {
+    elementos.foto.src = periodo.imagem;
+    elementos.foto.alt = `Imagem representando ${periodo.nome.toLowerCase()}`;
+}
+
+function atualizarData(agora) {
+    elementos.dia.textContent = agora.getDate();
+    elementos.mes.textContent = MESES[agora.getMonth()];
+    elementos.ano.textContent = agora.getFullYear();
+}
+
+function tratarErroImagem(periodo) {
+    console.error(`Falha ao carregar imagem: ${periodo.imagem}`);
+    elementos.foto.style.display = 'none';
+}
+
+function cachearElementos() {
+    elementos.horario = document.getElementById('horario');
+    elementos.periodo = document.getElementById('periodo');
+    elementos.foto = document.getElementById('foto');
+    elementos.dia = document.getElementById('dia');
+    elementos.mes = document.getElementById('mes');
+    elementos.ano = document.getElementById('ano');
+    
+    elementos.foto.onerror = () => tratarErroImagem(obterPeriodoDoDia(new Date().getHours()));
 }
 
 function atualizarInterface() {
     const agora = new Date();
-    const hora = agora.getHours();
-    const minutos = agora.getMinutes();
-    const dia = agora.getDate();
-    const mes = agora.getMonth();
-    const ano = agora.getFullYear();
-
-    const horarioElement = document.getElementById('horario');
-    const periodoElement = document.getElementById('periodo');
-    const fotoElement = document.getElementById('foto');
-    const diaElement = document.getElementById('dia');
-    const mesElement = document.getElementById('mes');
-    const anoElement = document.getElementById('ano');
-
-    const periodo = obterPeriodoDoDia(hora);
-
-    const horaFormatada = hora.toString().padStart(2, '0');
-    const minutosFormatados = minutos.toString().padStart(2, '0');
-
-    horarioElement.textContent = `${horaFormatada}:${minutosFormatados}`;
-    periodoElement.textContent = `${periodo.nomeJapones} ${periodo.nome}`;
-
-    fotoElement.src = periodo.imagem;
-    fotoElement.alt = `Imagem representando ${periodo.nome.toLowerCase()}`;
-
-    diaElement.textContent = dia;
-    mesElement.textContent = MESES[mes];
-    anoElement.textContent = ano;
-
-    fotoElement.onerror = function () {
-        console.error(`Erro ao carregar: ${periodo.imagem}`);
-        this.style.display = 'none';
-    };
+    const periodo = obterPeriodoDoDia(agora.getHours());
+    
+    atualizarHorario(agora);
+    atualizarPeriodo(periodo);
+    atualizarImagem(periodo);
+    atualizarData(agora);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function inicializar() {
+    cachearElementos();
     atualizarInterface();
-    setInterval(atualizarInterface, 1000);
-});
+    setInterval(atualizarInterface, INTERVALO_ATUALIZACAO);
+}
+
+document.addEventListener('DOMContentLoaded', inicializar);

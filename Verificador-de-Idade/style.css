@@ -1,0 +1,418 @@
+/* 
+===========================================
+🎨 CSS FUTURISTA - VERIFICADOR DE IDADE
+Inspirado em design espacial moderno
+===========================================
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    font-family: 'Segoe UI', 'Yu Gothic', 'Meiryo', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #e4e4e7;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Efeito de partículas/estrelas de fundo */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255, 255, 255, 0.3), transparent);
+    background-size: 200% 200%;
+    animation: estrelas 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes estrelas {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Header lateral com título japonês */
+header {
+    text-align: center;
+    padding: clamp(1rem, 3vh, 2rem) 1rem;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+header h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    color: #a1a1aa;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+}
+
+/* Container principal centralizado */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 3vh, 2rem);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Card principal com glassmorphism */
+.card {
+    background: rgba(24, 24, 37, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: clamp(1.5rem, 4vh, 3rem);
+    width: 100%;
+    max-width: min(90vw, 550px);
+    max-height: 80vh;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* 🔥 Adicionei gap pra espaçar elementos */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow-y: auto; /* 🔥 Scroll no card inteiro */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 12px 48px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Campo de entrada */
+.Card.idade {
+    margin-bottom: clamp(1rem, 2vh, 1.5rem);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: #a1a1aa;
+    font-weight: 400;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: clamp(0.75rem, 2vh, 1rem) 1.25rem;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 12px;
+    background: rgba(20, 20, 40, 0.6);
+    color: #ffffff;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.1em;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: rgba(20, 20, 40, 0.8);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Radio buttons estilizados */
+input[type="radio"] {
+    margin: 0 0.75rem 0 0.5rem;
+    cursor: pointer;
+    accent-color: #6366f1;
+    width: 18px;
+    height: 18px;
+}
+
+div > p {
+    margin: clamp(1rem, 2vh, 1.5rem) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    color: #e4e4e7;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+div > p label {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    text-transform: none;
+    letter-spacing: 0.05em;
+    color: #a1a1aa;
+}
+
+/* Botão futurista */
+button {
+    width: 100%;
+    padding: clamp(0.875rem, 2vh, 1.125rem);
+    margin: clamp(1rem, 2vh, 1.5rem) 0;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* Área de resposta */
+#resposta {
+    text-align: center;
+    padding: clamp(1rem, 2vh, 1.5rem);
+    padding-bottom: clamp(1.5rem, 3vh, 2rem); /* 🔥 MAIS padding embaixo pra caber a foto! */
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    min-height: 100px;
+    display: block;
+    overflow: visible; /* 🔥 MUDEI pra visible - não corta mais! */
+}
+
+/* Scrollbar customizada para o card */
+.card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.5);
+    border-radius: 10px;
+}
+
+#resposta p {
+    color: #a1a1aa;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    margin: 0.5rem 0;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+}
+
+#resposta p strong {
+    color: #ffffff;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+    display: block;
+    margin: 0.5rem 0;
+    letter-spacing: 0.1em;
+}
+
+/* Container da foto com efeito */
+.foto-container {
+    margin: clamp(0.5rem, 1vh, 0.75rem) auto clamp(0.5rem, 1vh, 0.75rem); /* 🔥 Margens menores */
+    width: 100%;
+    max-width: min(45vw, 160px); /* 🔥 Um pouco menor */
+    min-height: 160px; /* 🔥 Altura menor */
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+    background: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.foto-container::before {
+    display: none; /* 🔥 REMOVIDO - sem overlay! */
+}
+
+#foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 🔥 COVER ao invés de contain pra preencher círculo */
+    display: block !important;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(0.95) contrast(1.05);
+    padding: 0; /* 🔥 SEM padding */
+    animation: fadeIn 0.5s ease;
+}
+
+.foto-container:hover #foto {
+    transform: scale(1.05);
+    filter: brightness(1) contrast(1.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mensagem de erro */
+#resposta p[style*="color: red"] {
+    color: #f87171 !important;
+    background: rgba(248, 113, 113, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+/* 
+===========================================
+📱 RESPONSIVIDADE
+===========================================
+*/
+
+/* Desktop - Header lateral */
+@media (min-width: 768px) and (min-height: 600px) {
+    body {
+        flex-direction: row;
+    }
+    
+    header {
+        writing-mode: vertical-rl;
+        border-bottom: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+        padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    header h1 {
+        margin-bottom: 1rem;
+    }
+    
+    main {
+        flex: 1;
+    }
+}
+
+/* Tablets e mobile landscape */
+@media (max-height: 600px) and (orientation: landscape) {
+    .card {
+        max-height: 90vh;
+        padding: clamp(1rem, 3vh, 1.5rem);
+    }
+    
+    #foto {
+        max-width: 150px;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 767px) {
+    header {
+        padding: clamp(0.75rem, 2vh, 1.5rem) 1rem;
+    }
+    
+    .card {
+        padding: clamp(1rem, 3vh, 2rem);
+        max-height: 75vh;
+    }
+    
+    div > p {
+        gap: 1rem;
+    }
+    
+    .foto-container {
+        max-width: min(40vw, 140px); /* 🔥 Menor no mobile */
+        min-height: 140px;
+    }
+    
+    #resposta {
+        padding-bottom: clamp(1.25rem, 2.5vh, 1.75rem); /* 🔥 Padding ajustado */
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 350px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.65rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+    
+    .foto-container {
+        max-width: 120px; /* 🔥 Bem menor em telas pequenas */
+        min-height: 120px;
+    }
+    
+    #resposta {
+        padding-bottom: 1.25rem; /* 🔥 Padding ajustado */
+    }
+}
