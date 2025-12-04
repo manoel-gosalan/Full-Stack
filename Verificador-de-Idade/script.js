@@ -1,3 +1,7 @@
+// ============================================================================
+// 📊 DADOS DA APLICAÇÃO
+// ============================================================================
+
 const PESSOAS = {
     crianca_masc: {
         inicio: 0,
@@ -57,26 +61,129 @@ const PESSOAS = {
     }
 };
 
-// Elementos do DOM
-const elementos = {
-    inputAno: document.getElementById('txtano'),
-    sexoMasc: document.getElementById('masc'),
-    sexoFem: document.getElementById('fem'),
-    resposta: document.getElementById('resposta'),
-    foto: document.getElementById('foto')
-};
+// ============================================================================
+// 🎭 SISTEMA DE MODAL (Componente UI)
+// ============================================================================
 
-const btn = document.getElementById('verificar');
+class ModalManager {
+    constructor() {
+        this.createModalHTML();
+        this.setupEventListeners();
+    }
 
-// Função para calcular idade baseado no ano
+    createModalHTML() {
+        const modalHTML = `
+            <div id="modal-overlay" class="modal-overlay">
+                <div class="modal-container">
+                    <div class="modal-content">
+                        <div class="modal-icon">⚠️</div>
+                        <h3 class="modal-title">Atenção</h3>
+                        <p class="modal-message"></p>
+                        <button class="modal-btn" onclick="modalManager.close()">Entendi</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        this.overlay = document.getElementById('modal-overlay');
+        this.message = this.overlay.querySelector('.modal-message');
+    }
+
+    show(message, icon = '⚠️') {
+        this.message.textContent = message;
+        this.overlay.querySelector('.modal-icon').textContent = icon;
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    setupEventListeners() {
+        this.overlay.addEventListener('click', (e) => {
+            if (e.target === this.overlay) this.close();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.overlay.classList.contains('active')) {
+                this.close();
+            }
+        });
+    }
+}
+
+// ============================================================================
+// 🎯 LÓGICA PRINCIPAL DO NEGÓCIO (Business Logic)
+// ============================================================================
+
+/**
+ * Função principal que coordena toda a verificação de idade
+ * Esta é a "orquestradora" - ela chama todas as outras funções
+ */
+function verificarIdade() {
+    // 1. Coleta dados do usuário
+    const anoNascimento = parseInt(elementos.inputAno.value);
+    const sexoMasculino = elementos.sexoMasc.checked;
+    
+    // 2. Valida entrada
+    if (!validarAnoNascimento(anoNascimento)) {
+        return; // Para aqui se inválido
+    }
+    
+    // 3. Processa dados
+    const idade = calcularIdade(anoNascimento);
+    const categoria = obterCategoriaPessoa(idade, sexoMasculino);
+    
+    // 4. Atualiza interface
+    atualizarResposta(categoria, idade);
+    
+    // 5. Log para debug
+    console.log('✅ Verificação realizada:', { anoNascimento, idade, sexoMasculino, categoria });
+}
+
+// ============================================================================
+// 🔧 FUNÇÕES AUXILIARES (Helper Functions)
+// ============================================================================
+
+/**
+ * Valida se o ano de nascimento está dentro do intervalo aceitável
+ * @param {number} ano - Ano a ser validado
+ * @returns {boolean} - true se válido, false se inválido
+ */
+function validarAnoNascimento(ano) {
+    const anoAtual = new Date().getFullYear();
+    const anoMinimo = 1900;
+    
+    if (!ano || ano < anoMinimo || ano > anoAtual) {
+        modalManager.show(
+            `Por favor, insira um ano entre ${anoMinimo} e ${anoAtual}!`,
+            '⚠️'
+        );
+        return false;
+    }
+    
+    return true;
+}
+
+/**
+ * Calcula a idade baseada no ano de nascimento
+ * @param {number} anoNascimento - Ano em que a pessoa nasceu
+ * @returns {number} - Idade calculada
+ */
 function calcularIdade(anoNascimento) {
     const anoAtual = new Date().getFullYear();
     return anoAtual - anoNascimento;
 }
 
-// Função para determinar categoria da pessoa
+/**
+ * Determina a categoria da pessoa baseada em idade e sexo
+ * @param {number} idade - Idade da pessoa
+ * @param {boolean} sexoMasculino - true se masculino, false se feminino
+ * @returns {Object|null} - Objeto com dados da categoria ou null
+ */
 function obterCategoriaPessoa(idade, sexoMasculino) {
-    // Array com todas as categorias
     const categorias = [
         { masc: PESSOAS.crianca_masc, fem: PESSOAS.crianca_fem },
         { masc: PESSOAS.adolescente_masc, fem: PESSOAS.adolescente_fem },
@@ -84,7 +191,6 @@ function obterCategoriaPessoa(idade, sexoMasculino) {
         { masc: PESSOAS.idoso_masc, fem: PESSOAS.idoso_fem }
     ];
     
-    // Procura a categoria que corresponde à idade
     for (let cat of categorias) {
         const categoria = sexoMasculino ? cat.masc : cat.fem;
         if (idade >= categoria.inicio && idade < categoria.fim) {
@@ -95,7 +201,15 @@ function obterCategoriaPessoa(idade, sexoMasculino) {
     return null;
 }
 
-// Função para atualizar a resposta visual
+// ============================================================================
+// 🎨 FUNÇÕES DE INTERFACE (UI Functions)
+// ============================================================================
+
+/**
+ * Atualiza a área de resposta com as informações da categoria
+ * @param {Object|null} categoria - Dados da categoria encontrada
+ * @param {number} idade - Idade calculada
+ */
 function atualizarResposta(categoria, idade) {
     if (!categoria) {
         elementos.resposta.innerHTML = `
@@ -105,7 +219,6 @@ function atualizarResposta(categoria, idade) {
         return;
     }
 
-    // 🔧 CORREÇÃO: Incluir a tag <img> dentro de container estilizado
     elementos.resposta.innerHTML = `
         <p><strong>${categoria.nomeJapones}</strong></p>
         <p>${categoria.nome}</p>
@@ -115,82 +228,60 @@ function atualizarResposta(categoria, idade) {
         </div>
     `;
     
-    // 🔍 DEBUG - Mostra o caminho que está tentando carregar
-    console.log('🖼️ Tentando carregar imagem:', categoria.imagem);
-    console.log('📁 Caminho completo:', window.location.href);
-    
-    // Pega a referência da nova imagem criada
+    configurarImagemComTratamentoDeErro(categoria);
+}
+
+/**
+ * Configura os event listeners da imagem (load e error)
+ * @param {Object} categoria - Categoria atual para tratamento de erro
+ */
+function configurarImagemComTratamentoDeErro(categoria) {
     const fotoElement = document.getElementById('foto');
     
-    // Tratamento de erro na imagem
     fotoElement.onerror = () => {
-        console.error('❌ ERRO: Falha ao carregar imagem:', categoria.imagem);
-        console.error('📍 Verifique se o arquivo existe em:', categoria.imagem);
+        console.error('❌ Falha ao carregar:', categoria.imagem);
         fotoElement.style.display = 'none';
-        elementos.resposta.innerHTML += `<p style="color: red;">⚠️ Imagem não encontrada: ${categoria.imagem}</p>`;
+        modalManager.show(`Imagem não encontrada: ${categoria.imagem}`, '🖼️');
     };
     
-    // Confirma se carregou com sucesso
     fotoElement.onload = () => {
-        console.log('✅ Imagem carregada com sucesso!');
+        console.log('✅ Imagem carregada:', categoria.imagem);
     };
 }
 
-// Função principal de inicialização
-function verificarIdade() {
-    const anoNascimento = parseInt(elementos.inputAno.value);
-    
-    // Validação
-    if (!anoNascimento || anoNascimento < 1900 || anoNascimento > new Date().getFullYear()) {
-        alert('Por favor, insira um ano de nascimento válido!');
-        return;
-    }
-    
-    const idade = calcularIdade(anoNascimento);
-    const sexoMasculino = elementos.sexoMasc.checked;
-    const categoria = obterCategoriaPessoa(idade, sexoMasculino);
-    
-    atualizarResposta(categoria, idade);
-    
-    console.log('Verificação realizada:', { anoNascimento, idade, sexoMasculino, categoria });
-}
+// ============================================================================
+// 🚀 INICIALIZAÇÃO DA APLICAÇÃO (App Initialization)
+// ============================================================================
 
-// Event Listener
+// Referências aos elementos do DOM
+const elementos = {
+    inputAno: document.getElementById('txtano'),
+    sexoMasc: document.getElementById('masc'),
+    sexoFem: document.getElementById('fem'),
+    resposta: document.getElementById('resposta'),
+    foto: document.getElementById('foto')
+};
+
+// Inicializa o sistema de modal
+const modalManager = new ModalManager();
+
+// Botão de verificação
+const btn = document.getElementById('verificar');
+
+// Event Listeners
 btn.addEventListener('click', () => {
-    console.log('Botão clicado!');
+    console.log('🔘 Botão verificar clicado');
     verificarIdade();
 });
 
-// Permitir Enter para verificar
 elementos.inputAno.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
+        console.log('⌨️ Enter pressionado');
         verificarIdade();
     }
 });
 
-// 🧪 CÓDIGO DE DIAGNÓSTICO - REMOVER DEPOIS!
-console.log('=== DIAGNÓSTICO COMPLETO ===');
-console.log('1️⃣ Elementos encontrados:', {
-    inputAno: elementos.inputAno ? '✅' : '❌',
-    sexoMasc: elementos.sexoMasc ? '✅' : '❌',
-    sexoFem: elementos.sexoFem ? '✅' : '❌',
-    resposta: elementos.resposta ? '✅' : '❌',
-    foto: elementos.foto ? '✅' : '❌',
-    botao: btn ? '✅' : '❌'
-});
-
-console.log('2️⃣ Caminhos das imagens:', {
-    masculino: PESSOAS.crianca_masc.imagem,
-    feminino: PESSOAS.crianca_fem.imagem
-});
-
-console.log('3️⃣ URL atual da página:', window.location.href);
-
-// Teste direto de carregamento
-const testeImg = new Image();
-testeImg.onload = () => console.log('✅ SUCESSO: Imagem masculina EXISTE e pode ser carregada!');
-testeImg.onerror = () => console.error('❌ ERRO: Imagem masculina NÃO pode ser carregada!');
-testeImg.src = PESSOAS.crianca_masc.imagem;
-
-console.log('4️⃣ Testando carregamento direto da imagem...');
-console.log('===========================');
+// Log de inicialização
+console.log('✅ Aplicação inicializada com sucesso!');
+console.log('📦 Elementos carregados:', Object.keys(elementos));
+console.log('🎭 Sistema de modal ativo');
